@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+
+
+    {% block title %}Homepage{% endblock title %}
+ 
+  
+    {% block content %}
+    
+ 
+    
+  
+    {% if api %}
+        {% if api == "something went wrong" %}    
+            <h3> There was an error </h3>  
+        {% else %}
+
+
+
+
+            <div class="container-fluid text-sm-center p-5" style="background-color: {{color}};"> <!-- bg-light is background color & p-5 is padding -->
+                <h1 class="display-2 " style="color: white">{{api.0.Category.Name}}</h1>
+                <p class="lead" style="color: white"> Current Status </p>
+                <hr class="my-4" style="color: white">
+                <h2 style="color: white">{{api.0.ReportingArea}} AIR Quality: {{api.0.AQI}}</h2>
+            </div>
+        {% endif %}
+    {% endif %}
+
+
+            </br></br></br>
+
+
+
+
+
+
+    <div class="container">
+    <table class="table table-striped-columns">
+        <thead class = "table-dark">
+            <tr class=" row">
+                <th class="col-2">Daily AQI Color</th>
+                <th class="col-2">Levels of Concern</th>
+                <th class="col-2">Values of Index</th>
+                <th class="col-6">Description of Air Quality</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% if air_description %}
+                {%for key,value in air_description.items%}
+            
+                        <tr class="row" style="background-color: {{key}} !important;">
+                            {% if key == 'yellow' %}
+                            <td class="col-2" style="font-weight: Bold; color:black">{{ key }}</td> 
+                            <td class="col-2" style=" font-weight: Bold; color:black">{{value.0}}</td>
+                            <td class="col-2" style=" font-weight: Bold; color:black">{{value.1}}</td>
+                            <td class="col-6" style=" font-weight: Bold; color:black">{{value.2}}</td>
+                            {% else %}
+                            <td class="col-2" style="font-weight: Bold; color:white">{{ key }}</td> 
+                            <td class="col-2" style=" font-weight: Bold; color:white">{{value.0}}</td>
+                            <td class="col-2" style=" font-weight: Bold; color:white">{{value.1}}</td>
+                            <td class="col-6" style=" font-weight: Bold; color:white">{{value.2}}</td>
+                            {% endif %}
+
+                        </tr>
+                {% endfor %}
+            {% endif %}
+    </div>
+   
+    {% endblock content %}
+
+  
+   
