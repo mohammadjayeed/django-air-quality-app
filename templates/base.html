@@ -9,42 +9,34 @@
     <div class="container">
     <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #dedfe3">
         <div class="container-fluid">
-          <a class="navbar-brand" href="#">Weather</a>
+          <a class="navbar-brand" href={% url 'homepage' %}><span style="color: orange;font-weight: bold;">Air</span><span style="color: #5e4708;font-weight: bold;">Quality</span></a>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-              <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="#">Home</a>
+              {% comment %} <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href={% url 'homepage' %}>Home</a>
                 
-              </li>
-              <li class="nav-item">
+              </li> {% endcomment %}
+              {% comment %} <li class="nav-item">
                 
                 <a class="nav-link active" aria-current="page"  href="{% url 'air-app' %}">app</a>
-              </li>
+              </li> {% endcomment %}
               
               
               
             </ul>
-            <form class="d-flex">
-              <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+            <form id= "form1" class="d-flex" action={% url 'homepage' %} method="POST">
+              {% csrf_token %}
+              <input class="form-control me-2" type="text" placeholder="zipcode" aria-label="Search" name="zip">
               {% comment %} <button class="btn btn-outline-warning" type="submit">Search</button> {% endcomment %}
-              <button type="submit" class="btn btn-warning">Search</button>
+              <button type="submit" class="btn btn-warning" form="form1">Hit</button>
             </form>
           </div>
         </div>
       </nav>
-      
       </div>
-      {% comment %} <style>
-        .good {background-color: #0C0;}
-        .moderate {background-color: #FFFF00;}
-        .usg {background-color: #FF9900;}
-        .unhealthy {background-color: #FF0000;}
-        .veryunhealthy {background-color: #990066;}
-        .hazardous {background-color: #660000;}
-      </style> {% endcomment %}
   </head>
   <body>
     <div class="container">
